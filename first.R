@@ -1,11 +1,10 @@
 #code a for-loop to create separate folders for each county in Oklahoma
-
 library(tidyverse)
 library(tidycensus)
 library(stringr)
+library(dplyr)
 
 #create object by getting county level data for Oklahoma
-
 ok <- get_acs(
 geography = "county",
 state = "OK",
@@ -31,10 +30,7 @@ full_path <- file.path(main_directory, new_subfolder)
 dir.create(full_path)
 
 #dir.create(file.path("C:/Users/mttwh/OneDrive/Documents/R Projects/first", ok_counties))
-
 #create sub-folders for every county in Oklahoma
-library(dplyr)
-
 dir <- "C:/Users/mttwh/OneDrive/Documents/R Projects/first/ok_counties"
 
 # Extract unique values for each county "NAME" 
