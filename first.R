@@ -1,5 +1,8 @@
 #code a for-loop to create separate folders for each county in Oklahoma
 
+library(tidyverse)
+library(tidycensus)
+
 #create object by getting county level data for Oklahoma
 
 ok <- get_acs(
