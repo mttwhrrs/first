@@ -19,4 +19,22 @@ select(GEOID, NAME)
 
 ok_counties
 
+#create a sub-folder for ok_counties
 
+# Get the current working directory
+getwd()
+
+# Define the path where you want to create the new subfolder
+directory <- "C:/Users/mttwh/OneDrive/Documents/R Projects/first"
+new_subfolder <- "ok_counties"
+full_path <- file.path(directory, new_subfolder)
+
+# Create the new subfolder
+dir.create(full_path)
+
+# Print a message to confirm creation
+if (dir.exists(full_path)) {
+  cat("Subfolder created successfully at:", full_path, "\n")
+} else {
+  cat("Failed to create subfolder at:", full_path, "\n")
+}
