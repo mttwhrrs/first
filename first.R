@@ -1,4 +1,4 @@
-#code for loop to create separate files for each county in Oklahoma
+#code a for-loop to create separate folders for each county in Oklahoma
 
 #create object
 
@@ -13,3 +13,4 @@ ok_counties <- ok |>
 select(GEOID, NAME)
 
 ok_counties
+
