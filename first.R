@@ -22,12 +22,16 @@ ok_counties
 #create a sub-folder for ok_counties
 
 # Get the current working directory
-getwd()
+current_directory <- getwd()
+# Print the current working directory
+print(current_directory)
 
 # Define the path where you want to create the new subfolder
-directory <- "C:/Users/mttwh/OneDrive/Documents/R Projects/first"
+main_directory <- "C:/Users/mttwh/OneDrive/Documents/R Projects/first"
 new_subfolder <- "ok_counties"
-full_path <- file.path(directory, new_subfolder)
+
+# Combine the main directory path with the new subfolder name
+full_path <- file.path(main_directory, new_subfolder)
 
 # Create the new subfolder
 dir.create(full_path)
