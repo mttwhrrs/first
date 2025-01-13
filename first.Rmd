@@ -1,0 +1,70 @@
+---
+title: "first task"
+subtitle: use the tidycensus package to get Census data for Oklahoma at the county level and code a for-loop to create separate subfolders in the working directory for each county
+author: "Matthew Harris"
+date: "2025-01-13"
+output: 
+  html_document: 
+    toc: true
+    theme: journal
+---
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(tidycensus)
+library(dplyr)
+```
+
+## create the `ok_counties` data object 
+
+First, I created an `ok` object and used the `tidycensus` package to assign it county-level census data for the state of Oklahoma; then, I created an `ok_counties` object and used a pipe to select the `NAME` variable in order to remove all other variables. I imagine there's a more direct route, but this is the workaround that came to mind. 
+
+The `NAME` values contained the county name listed as "*X* County, Oklahoma". However, it's obvious they are all counties in Oklahoma so I used the `gsub()` function to substitute the "County, Oklahoma" text with blank/empty parentheses in order to simply list the county names. For instance, from "Adair County, Oklahoma" to "Adair". 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+ok <- get_acs(
+geography = "county",
+state = "OK",
+variables = "B19013_001",
+year = 2020,
+)
+
+ok_counties <- ok |>
+select(NAME)
+
+ok_counties$NAME <- gsub(" County, Oklahoma", "", ok_counties$NAME)
+```
+
+## create a folder for `ok_counties` in the working directory
+
+First, I located my working directory and assigned it to the `main_directory` object; then, I assigned a subfolder named "ok_counties" to the `new_subfolder` object. Next, I used the `dir.create` function to create a folder/directory by combining the newly created objects within the `file.path` function.  
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+getwd()
+
+main_directory <- "C:/Users/mttwh/OneDrive/Documents/R Projects/first"
+
+new_subfolder <- "ok_counties"
+
+dir.create(file.path(main_directory, new_subfolder))
+```
+
+## create subfolders for each county in Oklahoma 
+
+First, I assigned my newly created folder "ok_counties" as the `dir` object (the directory); then, I extracted the 77 unique values (counties) from the `NAME` variable of the `ok_counties` object.
+
+Finally, using a for-loop, I used the `dir.create` function to create subfolders for each unique value (county) in the dataset, and I used the `as.character` function to name each folder as the name of each unique value (county). 
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+dir <- "C:/Users/mttwh/OneDrive/Documents/R Projects/first/ok_counties"
+
+unique_values <- unique(ok_counties$NAME)
+
+for (value in unique_values) {
+  dir.create(file.path(dir, as.character(value)))
+}
+```
+
+
+
+
